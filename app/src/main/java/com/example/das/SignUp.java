@@ -3,21 +3,34 @@ package com.example.das;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
 
+    //Declaración de elementos visuales
     EditText exp, name, lic, email, phone, pass, confirmPass;
     CheckBox terms;
+
+    //Declaración de elementos logicos
+    DBHelper DBHelper;
+    SQLiteDatabase db;
+    ContentValues values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //Inicialización de elementos logicos
         exp = findViewById(R.id._inputExp);
         name = findViewById(R.id._inputFullName);
         lic = findViewById(R.id._inputLic);
@@ -27,11 +40,45 @@ public class SignUp extends AppCompatActivity {
         confirmPass = findViewById(R.id._confirmPass);
         terms = findViewById(R.id._checkTerms);
 
+        //Inicilización de elementos logicos
+        DBHelper = new DBHelper(getApplicationContext());
+        db = DBHelper.getWritableDatabase();
+        values = new ContentValues();
+
     }
 
     public void sendUser(View v) {
-        if (checkEmptyFields() && checkTerms()) {
-            
+
+        if (checkEmptyFields() && checkTerms() && checkConfirmPass(checkEmptyFields())) {
+
+            values.put(Model.Alumnos.COLUMN_NAME_EXPEDIENTE, Integer.valueOf(exp.getText().toString()));
+            values.put(Model.Alumnos.COLUMN_NAME_NOMBRE, name.getText().toString());
+            values.put(Model.Alumnos.COLUMN_NAME_LIC, lic.getText().toString());
+            values.put(Model.Alumnos.COLUMN_NAME_PHONE, phone.getText().toString());
+            values.put(Model.Alumnos.COLUMN_NAME_EMAIL, email.getText().toString());
+            values.put(Model.Alumnos.COLUMN_NAME_PASSWORD, pass.getText().toString());
+
+            long newRowID = db.insert(Model.Alumnos.TABLE_NAME, null, values);
+
+            if (newRowID == Long.valueOf(exp.getText().toString())) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Rsgistro Existoso")
+                        .setMessage("El registro se a completado completamente. Ya puedes iniciar seción")
+                        .setPositiveButton("Iniciar Sesión", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent goToLogin = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(goToLogin);
+                            }
+                        }).show();
+
+                } else if (newRowID == -1) {
+                new AlertDialog.Builder(this)
+                .setTitle("Error en el registro")
+                .setMessage("No se ha podido registrar. Puede que el expediente " +
+                        exp.getText().toString() + " ya este en uso")
+                .setPositiveButton("OK", null);
+            }
         }
     }
 
@@ -39,14 +86,29 @@ public class SignUp extends AppCompatActivity {
 
     //Validar que no haya campos vacios
     private boolean checkEmptyFields() {
-        boolean flag =  (exp.getText().length() != 0 || name.getText().length() != 0 || lic.getText().length() != 0 ||
-                         email.getText().length() != 0 || email.getText().length() != 0 || phone.getText().length() != 0 ||
-                pass.getText().length() != 0 || confirmPass.getText().length() != 0) ? true : false;
+        boolean flag =  (exp.getText().toString().matches("") || name.getText().toString().matches("") ||
+                lic.getText().toString().matches("") || email.getText().toString().matches("") ||
+                email.getText().toString().matches("") || phone.getText().toString().matches("") ||
+                pass.getText().toString().matches("") || confirmPass.getText().toString().matches("")) ? false : true;
 
         if (!flag) {
             new AlertDialog.Builder(this)
                     .setTitle("Falta Información")
                     .setMessage("Has dejado campos sin llenar")
+                    .setPositiveButton("OK", null).show();
+        }
+
+        return flag;
+    }
+
+    private boolean checkConfirmPass(boolean flagEmpty) {
+        boolean flag = (flagEmpty && pass.getText().toString().equals(confirmPass.getText().toString()))
+                ? true : false;
+
+        if (!flag){
+            new AlertDialog.Builder(this)
+                    .setTitle("Las contraseñas no coinsiden")
+                    .setMessage("Debes de confirmas correctamente las contraseñas")
                     .setPositiveButton("OK", null).show();
         }
 

@@ -8,11 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
 
@@ -74,10 +72,10 @@ public class SignUp extends AppCompatActivity {
 
                 } else if (newRowID == -1) {
                 new AlertDialog.Builder(this)
-                .setTitle("Error en el registro")
-                .setMessage("No se ha podido registrar. Puede que el expediente " +
+                        .setTitle("Error en el registro")
+                        .setMessage("No se ha podido registrar. Puede que el expediente " +
                         exp.getText().toString() + " ya este en uso")
-                .setPositiveButton("OK", null);
+                        .setPositiveButton("OK", null).show();
             }
         }
     }

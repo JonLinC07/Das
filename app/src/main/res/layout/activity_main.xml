@@ -35,12 +35,12 @@
         app:layout_constraintVertical_bias="0.646" />
 
     <EditText
-        android:id="@+id/_inputUsrName"
+        android:id="@+id/_inputEmail"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:ems="10"
-        android:hint="Correo Institucional"
-        android:inputType="textPersonName"
+        android:hint="Expediente"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,6 +65,7 @@
         android:id="@+id/_btnSignIn"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:onClick="GoToHome"
         android:text="Sign In"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

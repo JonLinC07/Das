@@ -31,7 +31,13 @@ public final class Model {
 
     public static final String SQL_DELETE_ALUMNOS = "DROP TABLE IF EXISTS " + Alumnos.TABLE_NAME;
 
+
+    public static final String SQL_GET_SESSION_INFO = "SELECT " + Alumnos.COLUMN_NAME_EXPEDIENTE + ", " +
+            Alumnos.COLUMN_NAME_PASSWORD + " FROM " + Alumnos.TABLE_NAME;
+
+
     public static class Destinos implements BaseColumns {
+
         public static String TABLE_NAME = "Destinos";
         public static String COLUMN_NAME_ID = "id";
         public static String COLUMN_NAME_NOMBRE = "nombre";

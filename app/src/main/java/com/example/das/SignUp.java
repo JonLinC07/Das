@@ -32,7 +32,7 @@ public class SignUp extends AppCompatActivity {
         exp = findViewById(R.id._inputExp);
         name = findViewById(R.id._inputFullName);
         lic = findViewById(R.id._inputLic);
-        email = findViewById(R.id._inputEmail);
+        email = findViewById(R.id._inputExp);
         phone = findViewById(R.id._inputPhone);
         pass = findViewById(R.id._inputPass);
         confirmPass = findViewById(R.id._confirmPass);

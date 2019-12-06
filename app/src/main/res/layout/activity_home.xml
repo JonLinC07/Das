@@ -21,9 +21,10 @@
         app:layout_constraintVertical_bias="0.055" />
 
     <Button
-        android:id="@+id/_btnInfoDestino"
+        android:id="@+id/_btnDestinos"
         android:layout_width="134dp"
         android:layout_height="101dp"
+        android:onClick="GoToDestinos"
         android:text="Destinos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

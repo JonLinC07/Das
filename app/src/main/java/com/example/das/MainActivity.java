@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         fila.close();
     }
 
-
     public boolean checkEmptyFields() {
         boolean flag = (usrExp.isEmpty() || usrPass.isEmpty()) ? false : true;
 

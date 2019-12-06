@@ -58,9 +58,9 @@ public final class Model {
     public static final String SQL_DELETE_DESTINOS = "DROP TABLE IF EXISTS " + Destinos.TABLE_NAME;
 
     public static final String SQL_INSERT_DESTINOS = "INSERT INTO " + Destinos.TABLE_NAME + "( " +
-            Destinos.COLUMN_NAME_ID + ", " + ", " + Destinos.COLUMN_NAME_CIUDAD + ", " +
-            Destinos.COLUMN_NAME_PAIS + ", " + Destinos.COLUMN_NAME_COORDENADAS +
-            Destinos.COLUMN_NAME_UNIVERSIDAD + ", " + Destinos.COLUMN_NAME_LINK + ")VALUES ( " +
+            Destinos.COLUMN_NAME_CIUDAD + ", " + Destinos.COLUMN_NAME_PAIS + ", " +
+            Destinos.COLUMN_NAME_COORDENADAS + Destinos.COLUMN_NAME_UNIVERSIDAD + ", " +
+            Destinos.COLUMN_NAME_LINK + ")VALUES ( " +
             "'Ciudad de Mexico', 'México', 'geo:19.332465,-99.1869765,17', 'Universidad Nacional Autonoma de México (UNAM)', " +
             "'https://es.wikipedia.org/wiki/Universidad_Nacional_Aut%C3%B3noma_de_M%C3%A9xico'), " +
             "('Guadalajara', 'Mexico', 'geo:20.6947053,-103.4203198', 'Universidad Autonoma de Guadlajara (UAG)', " +

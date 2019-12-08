@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.068" />
 
     <WebView
-        android:id="@+id/webView"
+        android:id="@+id/_webInfo"
         android:layout_width="414dp"
         android:layout_height="336dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.928"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48" />
+        app:layout_constraintVertical_bias="0.416" />
 
     <Button
         android:id="@+id/_btnGoMaps"

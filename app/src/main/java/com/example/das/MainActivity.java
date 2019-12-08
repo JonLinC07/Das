@@ -8,16 +8,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.das.classes.Model;
+import com.example.das.classes.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     String[] projection;
     String usrExp, usrPass;
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +40,15 @@ public class MainActivity extends AppCompatActivity {
         //Inicilización de elementos logicos
         DBHelper = new DBHelper(getApplicationContext());
         db = DBHelper.getReadableDatabase();
-        projection =  new String[] {Model.Alumnos.COLUMN_NAME_EXPEDIENTE, Model.Alumnos.COLUMN_NAME_PASSWORD};
+        extras = getIntent().getExtras();
+        projection =  new String[] {Model.Alumnos.COLUMN_NAME_EXPEDIENTE, Model.Alumnos.COLUMN_NAME_NOMBRE,
+                                    Model.Alumnos.COLUMN_NAME_PASSWORD};
 
+        try {
+            exp.setText(extras.getString("EXP"));
+        } catch (Exception e) {
+            exp.setText("");
+        }
     }
 
     public void GoToSignUp(View v) {
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void GoToHome(View v) {
         usrExp = exp.getText().toString();
         usrPass = pass.getText().toString();
+        String expediente = "", contraseña = "", usrName = "";
 
         String selection = Model.Alumnos.COLUMN_NAME_EXPEDIENTE + " = ? AND " +
                 Model.Alumnos.COLUMN_NAME_PASSWORD + " = ?";
@@ -65,11 +69,17 @@ public class MainActivity extends AppCompatActivity {
         Cursor fila = db.query(Model.Alumnos.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
 
         while (fila.moveToNext()) {
-            String expediente = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_EXPEDIENTE));
-            String contraseña = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_PASSWORD));
+            expediente = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_EXPEDIENTE));
+            usrName = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_NOMBRE));
+            contraseña = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_PASSWORD));
+        }
+        fila.close();
 
+        if (checkEmptyFields()) {
             if (expediente.matches(usrExp) && contraseña.matches(usrPass)) {
                 Intent goToHome = new Intent(getApplicationContext(), Home.class);
+                goToHome.putExtra("USER_NAME", usrName);
+                goToHome.putExtra("USER_EXP", expediente);
                 startActivity(goToHome);
             } else {
                 new AlertDialog.Builder(this)
@@ -78,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("OK", null).show();
             }
         }
-        fila.close();
     }
 
     public boolean checkEmptyFields() {

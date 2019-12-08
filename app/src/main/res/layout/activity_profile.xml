@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile">
+
+    <TextView
+        android:id="@+id/_viewCampus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Campus"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.687" />
+
+    <TextView
+        android:id="@+id/_viewProm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Promedio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.63" />
+
+    <TextView
+        android:id="@+id/_viewCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Creditos"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.574" />
+
+    <TextView
+        android:id="@+id/_viewLic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Licenciatura"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <TextView
+        android:id="@+id/_viewPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telefono"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <ImageView
+        android:id="@+id/_viewPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/alienprofile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.121" />
+
+    <TextView
+        android:id="@+id/_viewName"
+        android:layout_width="209dp"
+        android:layout_height="128dp"
+        android:text="Name"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.121" />
+
+    <TextView
+        android:id="@+id/_viewExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Expediente"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.356" />
+
+    <TextView
+        android:id="@+id/_viewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Correo"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.407" />
+
+    <Button
+        android:id="@+id/_btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="GoToEdit"
+        android:text="Editar Perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.838" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

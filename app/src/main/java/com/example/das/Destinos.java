@@ -5,73 +5,81 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Display;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.das.classes.DBHelper;
+import com.example.das.classes.Model;
 
 public class Destinos extends AppCompatActivity {
 
     //Declaración de elementos visuales
-    TextView destino, university;
+    TextView viewDestino, viewUniversity;
     Spinner spinDestinos;
+    WebView webInfo;
 
     //Declaración de elementos logicos
-    DBHelper DBHelper;
+    com.example.das.classes.DBHelper DBHelper;
     SQLiteDatabase db;
-    ArrayList<String> listDestinos, destinosList;
+    String[] arrayDestinos, projection;
+    ArrayAdapter<String> adapter;
+    String location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destinos);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //Inicialización de elemenos visuales
-        destino = findViewById(R.id._viewDestino);
-        university = findViewById(R.id._viewUniversity);
+        viewDestino = findViewById(R.id._viewDestino);
+        viewUniversity = findViewById(R.id._viewUniversity);
         spinDestinos = findViewById(R.id._spinDestinos);
+        webInfo = findViewById(R.id._webInfo);
 
         //Inicialización de elemtnos logicos
         DBHelper = new DBHelper(getApplicationContext());
-
-        getDestinos();
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, listDestinos);
+        db = DBHelper.getReadableDatabase();
+        arrayDestinos = new String[] {"Ciudad de Mexico", "Guadalajara", "Vancuver", "Toronto"};
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, arrayDestinos);
         spinDestinos.setAdapter(adapter);
+        location = "";
+        projection = new String[] {Model.Destinos.COLUMN_NAME_CIUDAD, Model.Destinos.COLUMN_NAME_PAIS,
+                                   Model.Destinos.COLUMN_NAME_UNIVERSIDAD, Model.Destinos.COLUMN_NAME_COORDENADAS,
+                                   Model.Destinos.COLUMN_NAME_LINK};
+
+        //getCityInfo();
+
+        getToast(spinDestinos.getSelectedItem().toString());
     }
 
-    public void getDestinos() {
-        db = DBHelper.getReadableDatabase();
+    private void getToast(String city) {
+        Toast.makeText(getApplicationContext(), city, Toast.LENGTH_SHORT).show();
+    }
 
-        Model.Destinos newDestino = null;
-        destinosList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + Model.Destinos.TABLE_NAME, null);
+    public void getCityInfo() {
+        String place = "", university = "", url = "";
+        String city = spinDestinos.getSelectedItem().toString();
+        String selection = Model.Destinos.COLUMN_NAME_CIUDAD + " = ?";
+        String[] selectionArgs = { city };
+
+        Cursor cursor = db.query(Model.Destinos.TABLE_NAME, projection, selection, selectionArgs,
+                        null, null, null);
 
         while (cursor.moveToNext()) {
-            String city = cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_CIUDAD));
-            String country = cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_PAIS));
-            String all = city + ", " + country;
-
-            destinosList.add(all);
+            place = cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_CIUDAD)) +
+                    ", " + cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_PAIS));
+            university = cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_UNIVERSIDAD));
+            url = cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_LINK));
         }
-        getList();
+        cursor.close();
+
+        viewDestino.setText(place);
+        viewUniversity.setText(university);
+        webInfo.loadUrl(url);
+        location = cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_COORDENADAS));
     }
-
-    public void getList() {
-        listDestinos = new ArrayList<String>();
-        listDestinos.add("Seleccionar");
-
-        for (int i=0; i<destinosList.size(); i++) {
-            listDestinos.add(destinosList.get(i));
-        }
-    }
-
-
-
 }

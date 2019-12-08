@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import com.example.das.classes.DBHelper;
+import com.example.das.classes.Model;
+import com.example.das.classes.Sender;
+
 public class SignUp extends AppCompatActivity {
 
     //Declaración de elementos visuales
@@ -19,7 +23,7 @@ public class SignUp extends AppCompatActivity {
     CheckBox terms;
 
     //Declaración de elementos logicos
-    DBHelper DBHelper;
+    com.example.das.classes.DBHelper DBHelper;
     SQLiteDatabase db;
     ContentValues values;
 
@@ -27,12 +31,13 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //Inicialización de elementos logicos
         exp = findViewById(R.id._inputExp);
         name = findViewById(R.id._inputFullName);
         lic = findViewById(R.id._inputLic);
-        email = findViewById(R.id._inputExp);
+        email = findViewById(R.id._inputEmail);
         phone = findViewById(R.id._inputPhone);
         pass = findViewById(R.id._inputPass);
         confirmPass = findViewById(R.id._confirmPass);
@@ -42,7 +47,6 @@ public class SignUp extends AppCompatActivity {
         DBHelper = new DBHelper(getApplicationContext());
         db = DBHelper.getWritableDatabase();
         values = new ContentValues();
-
     }
 
     public void sendUser(View v) {
@@ -59,13 +63,16 @@ public class SignUp extends AppCompatActivity {
             long newRowID = db.insert(Model.Alumnos.TABLE_NAME, null, values);
 
             if (newRowID == Long.valueOf(exp.getText().toString())) {
+                sendEmail();
+
                 new AlertDialog.Builder(this)
                         .setTitle("Rsgistro Existoso")
-                        .setMessage("El registro se a completado completamente. Ya puedes iniciar seción")
+                        .setMessage("El registro se a completado. Ya puedes iniciar seción")
                         .setPositiveButton("Iniciar Sesión", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent goToLogin = new Intent(getApplicationContext(), MainActivity.class);
+                                goToLogin.putExtra("EXP", exp.getText().toString());
                                 startActivity(goToLogin);
                             }
                         }).show();
@@ -78,6 +85,17 @@ public class SignUp extends AppCompatActivity {
                         .setPositiveButton("OK", null).show();
             }
         }
+    }
+
+    public void sendEmail() {
+        String mailTo = email.getText().toString();
+        String subject = "Confirmación de registro DAD";
+        String message = "Bienvenido a DAS " + name.getText().toString() + ". Ahora podras acceder" +
+                "a nuestro portal, desde donde podras consultar cualquier información que desees con" +
+                "respecto a intercambios. Te esperamos en nuestro portal.";
+
+        Sender sender = new Sender(this, mailTo, subject.trim(), message);
+        sender.execute();
     }
 
     //VALIDACIONES
@@ -99,6 +117,7 @@ public class SignUp extends AppCompatActivity {
         return flag;
     }
 
+    //Confirmando que las contraseñas sean iguales
     private boolean checkConfirmPass(boolean flagEmpty) {
         boolean flag = (flagEmpty && pass.getText().toString().equals(confirmPass.getText().toString()))
                 ? true : false;

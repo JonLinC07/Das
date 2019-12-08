@@ -10,7 +10,7 @@
         android:id="@+id/_viewWelcome"
         android:layout_width="278dp"
         android:layout_height="49dp"
-        android:text="Welcome"
+        android:text="Bienvenido"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,19 @@
         android:text="Mi Solicitudes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/_btnProfile"
+        android:layout_width="134dp"
+        android:layout_height="101dp"
+        android:onClick="GoToProfile"
+        android:text="Perfil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.815"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -88,6 +88,6 @@ public final class Model {
             "'https://es.wikipedia.org/wiki/Universidad_Aut%C3%B3noma_de_Guadalajara'), " +
             "('Vancuver', 'Canada', 'geo:49.2602794,-123.2298715', 'University of British Columbia (UBC)', " +
             "'https://es.wikipedia.org/wiki/Universidad_de_Columbia_Brit%C3%A1nica'), " +
-            "'Toronto', 'Canada', 'geo:43.6628917,-79.3978504', 'University of Canada', " +
+            "('Toronto', 'Canada', 'geo:43.6628917,-79.3978504', 'University of Canada', " +
             "'https://es.wikipedia.org/wiki/Universidad_de_Toronto');";
 }

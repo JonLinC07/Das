@@ -4,11 +4,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.das.classes.DBHelper;
 import com.example.das.classes.Model;
@@ -28,7 +30,8 @@ public class MisSolicitudes extends AppCompatActivity {
     String genero;
     String licenciatura;
     String telefono;
-    String promedio;
+    String promedio, currentName, currentExp;
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,14 @@ public class MisSolicitudes extends AppCompatActivity {
                     + campus + "\n" + "Edad: "+ edad + "\n" + "Genero: " + genero + "\n" + "Licenciatura: " + licenciatura +
                     "\n" + "Teléfono: " + telefono + "\n" + "Promedio: " + promedio);
         }
+
+        try {
+            extras = getIntent().getExtras();
+            currentName = extras.getString("USER_NAME");
+            currentExp = extras.getString("USER_EXP");
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean checkEmptyFields() {
@@ -82,5 +93,14 @@ public class MisSolicitudes extends AppCompatActivity {
         }
 
         return flag;
+    }
+
+    //Enviar información a la actividad anterior
+    @Override
+    public void onBackPressed() {
+        Intent goBack = new Intent(getApplicationContext(), Home.class);
+        goBack.putExtra("USER_NAME", nombre);
+        goBack.putExtra("USER_EXP", expediente);
+        startActivity(goBack);
     }
 }

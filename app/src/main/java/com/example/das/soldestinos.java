@@ -22,6 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.das.classes.DBHelper;
 import com.example.das.classes.Model;
@@ -40,9 +41,8 @@ public class soldestinos extends AppCompatActivity {
     RadioButton radioBM;
     RadioGroup radioG;
     int radioButtonId;
-    String selectedR;
-
-
+    String selectedR, currentName, currentExp;
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +104,14 @@ public class soldestinos extends AppCompatActivity {
 
             }
         });
+
+        try {
+            extras = getIntent().getExtras();
+            currentName = extras.getString("USER_NAME");
+            currentExp = extras.getString("USER_EXP");
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     public String RBSelected(){
@@ -144,7 +152,8 @@ public class soldestinos extends AppCompatActivity {
                             }
                         }).show();
 
-            } else if (newRowID == -1) {
+            }
+            else if (newRowID == -1) {
                 new AlertDialog.Builder(this)
                         .setTitle("Error en el registro")
                         .setMessage("No se ha podido registrar. Puede que el expediente " +
@@ -157,8 +166,8 @@ public class soldestinos extends AppCompatActivity {
     private boolean checkEmptyFields() {
         boolean flag =  (et_nombre.getText().toString().matches("") || et_expediente.getText().toString().matches("") ||
                 et_universidad.getText().toString().matches("") || et_campus.getText().toString().matches("") ||
-                et_edad.getText().toString().matches("")  ||
-                et_licenciatura.getText().toString().matches("") || et_telefono.getText().toString().matches("")) ? false : true;
+                et_edad.getText().toString().matches("")  || et_licenciatura.getText().toString().matches("") ||
+                et_telefono.getText().toString().matches("")) ? false : true;
 
         if (!flag) {
             new AlertDialog.Builder(this)
@@ -168,5 +177,14 @@ public class soldestinos extends AppCompatActivity {
         }
 
         return flag;
+    }
+
+    //Enviar información a la actividad anterior
+    @Override
+    public void onBackPressed() {
+        Intent goBack = new Intent(getApplicationContext(), Home.class);
+        goBack.putExtra("USER_NAME", et_nombre.getText().toString());
+        goBack.putExtra("USER_EXP", et_expediente.getText().toString());
+        startActivity(goBack);
     }
 }

@@ -51,20 +51,29 @@ public class Home extends AppCompatActivity {
         DBHelper = new DBHelper(getApplicationContext());
         db = DBHelper.getReadableDatabase();
 
-        currentName = extras.getString("USER_NAME");
-        currentExp = extras.getString("USER_EXP");
-        viewWelcome.setText("Bienvenido " + currentName);
+        try {
+            currentName = extras.getString("USER_NAME");
+            currentExp = extras.getString("USER_EXP");
+            viewWelcome.setText("Bienvenido " + currentName);
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
 
         welcome.start();
     }
 
     public void solicitarInercambio(View view){
         Intent goToS = new Intent(getApplicationContext(), soldestinos.class);
+        goToS.putExtra("USER_NAME", currentName);
+        goToS.putExtra("USER_EXP", currentExp);
         startActivity(goToS);
     }
 
     public void misSol(View view){
         Intent goToMis = new Intent(getApplicationContext(), MisSolicitudes.class);
+        goToMis.putExtra("USER_NAME", currentName);
+        goToMis.putExtra("USER_EXP", currentExp);
         startActivity(goToMis);
     }
 

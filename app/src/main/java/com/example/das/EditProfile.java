@@ -168,7 +168,6 @@ public class EditProfile extends AppCompatActivity {
                             goToProfile.putExtra("CREDITS", inputCredits.getText().toString());
                             goToProfile.putExtra("PROM", viewProm.getText().toString());
                             goToProfile.putExtra("CAMPUS", spinCampus.getSelectedItem().toString());
-                            //goToProfile.putExtra("PATH", photoPath);
                             startActivity(goToProfile);
                         }
                     }).show();

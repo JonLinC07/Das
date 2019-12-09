@@ -33,6 +33,7 @@ public class soldestinos extends AppCompatActivity {
     TextView tv_pais;
     SeekBar seek;
     ImageView imgPais;
+    
     //Declaración de elementos logicos
     DBHelper DBHelper;
     SQLiteDatabase db;
@@ -40,7 +41,6 @@ public class soldestinos extends AppCompatActivity {
     RadioButton radioBF;
     RadioButton radioBM;
     RadioGroup radioG;
-    int radioButtonId;
     String selectedR, currentName, currentExp;
     Bundle extras;
 
@@ -60,13 +60,10 @@ public class soldestinos extends AppCompatActivity {
         et_licenciatura = findViewById(R.id.et_licenciatura);
         et_telefono = findViewById(R.id.et_telefono);
         et_promedio= findViewById(R.id.et_promedio);
-
-        tv_pais = (TextView) findViewById(R.id.tv_pais);
-        seek = (SeekBar) findViewById(R.id.seekBar);
-        imgPais = (ImageView) findViewById(R.id.imageView2);
-
-        radioG= (RadioGroup) findViewById(R.id.radioG);
-
+        tv_pais = findViewById(R.id.tv_pais);
+        seek = findViewById(R.id.seekBar);
+        imgPais = findViewById(R.id.imageView2);
+        radioG = findViewById(R.id.radioG);
 
         //Inicilización de elementos logicos
         DBHelper = new DBHelper(getApplicationContext());

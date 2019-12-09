@@ -24,7 +24,7 @@ public class Destinos extends AppCompatActivity {
     //Declaración de elementos logicos
     com.example.das.classes.DBHelper DBHelper;
     SQLiteDatabase db;
-    String[] arrayDestinos, projection;
+    String[] arrayDestinos, projection, unam, uag, ubc, canaada;
     ArrayAdapter<String> adapter;
     String location;
 

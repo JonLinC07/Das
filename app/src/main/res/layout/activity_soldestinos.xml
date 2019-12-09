@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".soldestinos">
+
+    <ScrollView
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/CiudadD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Elige un destino" />
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:max="4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="Gatito"
+                    android:src="@drawable/alemania"
+                    tools:srcCompat="@tools:sample/avatars[3]" />
+
+                <TextView
+                    android:id="@+id/tv_pais"
+                    android:layout_width="wrap_content"
+                    android:layout_height="101dp"
+                    android:layout_weight="5"
+                    android:editable="true"
+                    android:text="País" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Nombre Completo"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_expediente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Expediente"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/et_universidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Universidad"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_campus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Campus"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_edad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Edad"
+                android:inputType="number" />
+
+            <RadioGroup
+                android:id="@+id/radioG"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/radioBM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Masculino" />
+
+                    <RadioButton
+                        android:id="@+id/radioBF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Femenino" />
+                </LinearLayout>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/et_licenciatura"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Licenciatura"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Telefono"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/et_promedio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Promedio General"
+                android:inputType="textPersonName|numberDecimal" />
+
+            <Button
+                android:id="@+id/Registrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="guardarS"
+                android:text="Registrar" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

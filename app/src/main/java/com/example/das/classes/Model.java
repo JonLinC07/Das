@@ -16,7 +16,6 @@ public final class Model {
         public static String COLUMN_NAME_CREDITOS = "creditos";
         public static String COLUMN_NAME_PROMEDIO = "promedio";
         public static String COLUMN_NAME_CAMPUS = "campus";
-        //public static String COLUMN_NAME_PHOTO = "ruta_foto";
     }
 
     public static final String SQL_CREATE_ALUMNOS = "CREATE TABLE " + Alumnos.TABLE_NAME + " (" +
@@ -29,9 +28,34 @@ public final class Model {
             Alumnos.COLUMN_NAME_PROMEDIO + " REAL, " +
             Alumnos.COLUMN_NAME_CREDITOS + " INTEGER, " +
             Alumnos.COLUMN_NAME_CAMPUS + " TEXT)";
-            //Alumnos.COLUMN_NAME_PHOTO + " TEXT)";
 
     public static final String SQL_DELETE_ALUMNOS = "DROP TABLE IF EXISTS " + Alumnos.TABLE_NAME;
+
+    public static class Solicitudes implements BaseColumns {
+        public static String TABLE_NAME2 = "Solicitudes";
+        public static String COLUMN_NAME_NOMBRE = "nombre";
+        public static String COLUMN_NAME_EXPEDIENTE = "expediente";
+        public static String COLUMN_NAME_UNIVERSIDAD = "universidad";
+        public static String COLUMN_NAME_CAMPUS = "campus";
+        public static String COLUMN_NAME_EDAD = "edad";
+        public static String COLUMN_NAME_GENERO = "genero";
+        public static String COLUMN_NAME_LICENCIATURA = "licenciatura";
+        public static String COLUMN_NAME_TELEFONO = "telefono";
+        public static String COLUMN_NAME_PROMEDIO = "promedio";
+    }
+
+    public static final String SQL_CREATE_SOLICITUDES = "CREATE TABLE " + Solicitudes.TABLE_NAME2 + " (" +
+            Solicitudes.COLUMN_NAME_EXPEDIENTE + " INTEGER PRIMARY KEY, " +
+            Solicitudes.COLUMN_NAME_NOMBRE + " TEXT NOT NULL, " +
+            Solicitudes.COLUMN_NAME_UNIVERSIDAD + " TEXT NOT NULL, " +
+            Solicitudes.COLUMN_NAME_CAMPUS + " TEXT NOT NULL, " +
+            Solicitudes.COLUMN_NAME_EDAD + " TEXT NOT NULL, " +
+            Solicitudes.COLUMN_NAME_GENERO + " TEXT NOT NULL, " +
+            Solicitudes.COLUMN_NAME_LICENCIATURA + " TEXT NOT NULL, " +
+            Solicitudes.COLUMN_NAME_TELEFONO + " TEXT NOT NULL, " +
+            Solicitudes.COLUMN_NAME_PROMEDIO + " REAL)";
+
+    public static final String SQL_DELETE_SOLICITUDES = "DROP TABLE IF EXISTS " + Solicitudes.TABLE_NAME2;
 
     public static class Destinos implements BaseColumns {
 

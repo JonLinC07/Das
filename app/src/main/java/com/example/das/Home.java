@@ -58,6 +58,16 @@ public class Home extends AppCompatActivity {
         welcome.start();
     }
 
+    public void solicitarInercambio(View view){
+        Intent goToS = new Intent(getApplicationContext(), soldestinos.class);
+        startActivity(goToS);
+    }
+
+    public void misSol(View view){
+        Intent goToMis = new Intent(getApplicationContext(), MisSolicitudes.class);
+        startActivity(goToMis);
+    }
+
     public void GoToDestinos(View v) {
         click.start();
         Intent goToDestinos = new Intent(getApplicationContext(), Destinos.class);
@@ -73,24 +83,6 @@ public class Home extends AppCompatActivity {
         goToProfile.putExtra("USER_EXP", currentExp);
         startActivity(goToProfile);
     }
-
-    /*
-    public void sessionValidator(String exp, String pass) {
-        String[] projection = { Model.Alumnos.COLUMN_NAME_EXPEDIENTE, Model.Alumnos.COLUMN_NAME_PASSWORD };
-        String selection = Model.Alumnos.COLUMN_NAME_EXPEDIENTE + " = ? AND " +
-                            Model.Alumnos.COLUMN_NAME_PASSWORD + " = ?";
-        String[] selectionArgs = { exp, pass };
-        Cursor fila = db.query(Model.Alumnos.TABLE_NAME, projection, selection, selectionArgs,
-                                null, null, null);
-
-        while (fila.moveToNext()) {
-            String expediente = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_EXPEDIENTE));
-            String password = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_PASSWORD));
-            String name = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_NOMBRE));
-
-        }
-    }
-     */
 
     //Guardando estado de la actividad
     @Override

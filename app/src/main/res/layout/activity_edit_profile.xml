@@ -239,10 +239,10 @@
             <Button
                 android:id="@+id/_btnSave"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="206dp"
                 android:layout_margin="10dp"
-                android:onClick="sendUpdateUser"
-                android:text="Guardar" />
+                android:background="@mipmap/save"
+                android:onClick="sendUpdateUser" />
 
         </LinearLayout>
     </ScrollView>

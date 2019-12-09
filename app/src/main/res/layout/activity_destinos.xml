@@ -34,8 +34,8 @@
 
     <WebView
         android:id="@+id/_webInfo"
-        android:layout_width="414dp"
-        android:layout_height="336dp"
+        android:layout_width="410dp"
+        android:layout_height="280dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -47,22 +47,22 @@
         android:id="@+id/_btnRequest"
         android:layout_width="104dp"
         android:layout_height="52dp"
-        android:text="Solicitar Intercambio"
+        android:background="@mipmap/solicitud"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.416" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <Button
         android:id="@+id/_btnGoMaps"
         android:layout_width="104dp"
         android:layout_height="52dp"
-        android:text="Ver en Maps"
+        android:background="@mipmap/destinos"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.329" />
@@ -80,6 +80,18 @@
         app:layout_constraintVertical_bias="0.337" />
 
     <TextView
+        android:id="@+id/_viewDestino2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solicitar Intercambio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/_btnRequest"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.436" />
+
+    <TextView
         android:id="@+id/_viewUniversity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,5 +102,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.41" />
+
+    <TextView
+        android:id="@+id/_viewUniversity2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver en Maps"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/_btnRequest"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.273" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

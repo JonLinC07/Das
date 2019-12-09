@@ -1,12 +1,19 @@
 package com.example.das;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.das.classes.DBHelper;
+import com.example.das.classes.Model;
 
 import org.w3c.dom.Text;
 
@@ -20,27 +27,27 @@ public class Home extends AppCompatActivity {
     //Declaración de elementos logicos
     Bundle extras;
     String currentName, currentExp;
+    DBHelper DBHelper;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Inicio");
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         //Inicialización de elementos visuales
         viewWelcome = findViewById(R.id._viewWelcome);
 
         //Inicialización de elementos logicos
         extras = getIntent().getExtras();
+        DBHelper = new DBHelper(getApplicationContext());
+        db = DBHelper.getReadableDatabase();
 
-        try {
-            currentName = extras.getString("USER_NAME");
-            currentExp = extras.getString("USER_EXP");
-            viewWelcome.setText("Bienvenido " + currentName);
-
-        } catch(Exception e) {
-            Toast.makeText(getApplicationContext(), "Algo anda mal", Toast.LENGTH_SHORT).show();
-        }
+        currentName = extras.getString("USER_NAME");
+        currentExp = extras.getString("USER_EXP");
+        viewWelcome.setText("Bienvenido " + currentName);
     }
 
     public void GoToDestinos(View v) {
@@ -55,5 +62,49 @@ public class Home extends AppCompatActivity {
         goToProfile.putExtra("USER_NAME", currentName);
         goToProfile.putExtra("USER_EXP", currentExp);
         startActivity(goToProfile);
+    }
+
+    /*
+    public void sessionValidator(String exp, String pass) {
+        String[] projection = { Model.Alumnos.COLUMN_NAME_EXPEDIENTE, Model.Alumnos.COLUMN_NAME_PASSWORD };
+        String selection = Model.Alumnos.COLUMN_NAME_EXPEDIENTE + " = ? AND " +
+                            Model.Alumnos.COLUMN_NAME_PASSWORD + " = ?";
+        String[] selectionArgs = { exp, pass };
+        Cursor fila = db.query(Model.Alumnos.TABLE_NAME, projection, selection, selectionArgs,
+                                null, null, null);
+
+        while (fila.moveToNext()) {
+            String expediente = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_EXPEDIENTE));
+            String password = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_PASSWORD));
+            String name = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_NOMBRE));
+
+        }
+    }
+     */
+
+    //Guardando estado de la actividad
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("NAME", extras.getString("USER_NAME"));
+        outState.putString("EXP", extras.getString("USER_EXP"));
+    }
+
+    //Reestableciendo el estado de la actividad
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        currentExp = savedInstanceState.getString("EXP");
+        viewWelcome.setText("Bievenido " + savedInstanceState.getString("NAME"));
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent goBack = new Intent(getApplicationContext(), MainActivity.class);
+        goBack.putExtra("USER_NAME", currentName);
+        goBack.putExtra("USER_EXP", currentExp);
+        startActivity(goBack);
     }
 }

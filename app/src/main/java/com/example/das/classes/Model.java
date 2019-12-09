@@ -16,6 +16,7 @@ public final class Model {
         public static String COLUMN_NAME_CREDITOS = "creditos";
         public static String COLUMN_NAME_PROMEDIO = "promedio";
         public static String COLUMN_NAME_CAMPUS = "campus";
+        //public static String COLUMN_NAME_PHOTO = "ruta_foto";
     }
 
     public static final String SQL_CREATE_ALUMNOS = "CREATE TABLE " + Alumnos.TABLE_NAME + " (" +
@@ -28,6 +29,7 @@ public final class Model {
             Alumnos.COLUMN_NAME_PROMEDIO + " REAL, " +
             Alumnos.COLUMN_NAME_CREDITOS + " INTEGER, " +
             Alumnos.COLUMN_NAME_CAMPUS + " TEXT)";
+            //Alumnos.COLUMN_NAME_PHOTO + " TEXT)";
 
     public static final String SQL_DELETE_ALUMNOS = "DROP TABLE IF EXISTS " + Alumnos.TABLE_NAME;
 

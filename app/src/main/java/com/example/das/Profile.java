@@ -7,14 +7,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.das.classes.DBHelper;
 import com.example.das.classes.Model;
+
+import java.io.File;
 
 public class Profile extends AppCompatActivity {
 
@@ -27,12 +35,14 @@ public class Profile extends AppCompatActivity {
     SQLiteDatabase db;
     Bundle extras;
     String name = "", exp = "", lic = "", email = "", phone = "", credits = "", prom = "", campus = "";
+    //String photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Perfil");
 
         //Inicialización de elementos visuales
         viewName = findViewById(R.id._viewName);
@@ -49,10 +59,12 @@ public class Profile extends AppCompatActivity {
         DBHelper = new DBHelper(getApplicationContext());
         db = DBHelper.getReadableDatabase();
 
+
         try {
             extras = getIntent().getExtras();
             name = extras.getString("USER_NAME");
             exp = extras.getString("USER_EXP");
+            //photoPath = extras.getString("PATH");
             getProfileInfo(exp);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Algo anda mal", Toast.LENGTH_SHORT).show();
@@ -87,6 +99,14 @@ public class Profile extends AppCompatActivity {
         viewProm.setText("Promedio: " + prom);
         viewCampus.setText("Campus: " + campus);
 
+/*
+        File imageFile = new File(photoPath);
+
+        if (imageFile.exists()) {
+            Bitmap image = BitmapFactory.decodeFile(imageFile.getAbsolutePath());
+            profilePhoto.setImageBitmap(image);
+        }
+*/
         if (credits == null || prom == null || campus == null) {
             new AlertDialog.Builder(this)
                     .setTitle("Perfil Incompleto")
@@ -103,6 +123,7 @@ public class Profile extends AppCompatActivity {
                             goToEdit.putExtra("PHONE", phone);
                             goToEdit.putExtra("CREDITS", credits);
                             goToEdit.putExtra("PROM", prom);
+                            //goToEdit.putExtra("PHOTO_PATH", photoPath);
                             startActivity(goToEdit);
                         }
                     })
@@ -110,6 +131,7 @@ public class Profile extends AppCompatActivity {
         }
     }
 
+    //Envia y direcciona a la actividad para editar el perfil
     public void GoToEdit(View v) {
         Intent goToEdit = new Intent(getApplicationContext(), EditProfile.class);
         goToEdit.putExtra("USER_NAME", name);
@@ -119,6 +141,17 @@ public class Profile extends AppCompatActivity {
         goToEdit.putExtra("PHONE", phone);
         goToEdit.putExtra("CREDITS", credits);
         goToEdit.putExtra("PROM", prom);
+        //goToEdit.putExtra("PHOTO_PATH", photoPath);
         startActivity(goToEdit);
+    }
+
+
+    //Enviar información a la actividad anterior
+    @Override
+    public void onBackPressed() {
+        Intent goBack = new Intent(getApplicationContext(), Home.class);
+        goBack.putExtra("USER_NAME", viewName.getText().toString());
+        goBack.putExtra("USER_EXP", exp);
+        startActivity(goBack);
     }
 }

@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Inicio de Sesión");
 
         //Inicialización de elementos visuales
         exp = findViewById(R.id._inputExp);

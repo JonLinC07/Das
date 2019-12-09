@@ -58,6 +58,7 @@ public class Destinos extends AppCompatActivity {
 
     private void getToast(String city) {
         Toast.makeText(getApplicationContext(), city, Toast.LENGTH_SHORT).show();
+        setTitle("Destinos");
     }
 
     public void getCityInfo() {
@@ -82,4 +83,6 @@ public class Destinos extends AppCompatActivity {
         webInfo.loadUrl(url);
         location = cursor.getString(cursor.getColumnIndexOrThrow(Model.Destinos.COLUMN_NAME_COORDENADAS));
     }
+
+
 }

@@ -32,6 +32,7 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Registro");
 
         //Inicialización de elementos logicos
         exp = findViewById(R.id._inputExp);

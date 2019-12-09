@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile">
+    tools:context=".EditProfile">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -41,13 +41,13 @@
                     android:layout_width="142dp"
                     android:layout_height="143dp"
                     android:layout_margin="10dp"
-                    android:background="@mipmap/alienprofile"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.071" />
+                    app:layout_constraintVertical_bias="0.071"
+                    app:srcCompat="@mipmap/alienprofile" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -60,7 +60,7 @@
                         android:layout_width="81dp"
                         android:layout_height="85dp"
                         android:layout_margin="10dp"
-                        android:onClick="GoToEdit"
+                        android:onClick="GoToGallery"
                         android:text="Abrir Galeria"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +74,7 @@
                         android:layout_width="81dp"
                         android:layout_height="85dp"
                         android:layout_margin="10dp"
-                        android:onClick="GoToEdit"
+                        android:onClick="openCamera"
                         android:text="Tomar Foto"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

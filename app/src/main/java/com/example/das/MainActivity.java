@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 Model.Alumnos.COLUMN_NAME_PASSWORD + " = ?";
         String[] selectionArgs = {usrExp, usrPass};
 
-        Cursor fila = db.query(Model.Alumnos.TABLE_NAME, projection, selection, selectionArgs, null, null, null);
+        Cursor fila = db.query(Model.Alumnos.TABLE_NAME, projection, selection, selectionArgs,
+                            null, null, null);
 
         while (fila.moveToNext()) {
             expediente = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_EXPEDIENTE));

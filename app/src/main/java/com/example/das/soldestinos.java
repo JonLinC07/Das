@@ -3,6 +3,7 @@ package com.example.das;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
@@ -33,7 +34,7 @@ public class soldestinos extends AppCompatActivity {
     TextView tv_pais;
     SeekBar seek;
     ImageView imgPais;
-    
+
     //Declaración de elementos logicos
     DBHelper DBHelper;
     SQLiteDatabase db;
@@ -41,7 +42,7 @@ public class soldestinos extends AppCompatActivity {
     RadioButton radioBF;
     RadioButton radioBM;
     RadioGroup radioG;
-    String selectedR, currentName, currentExp;
+    String selectedR, currentName, currentExp, campus = "", credits = "", prom = "", phone = "", email = "", lic = "";
     Bundle extras;
 
     @Override
@@ -109,6 +110,8 @@ public class soldestinos extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+        userInfo(currentExp);
     }
 
     public String RBSelected(){
@@ -149,8 +152,7 @@ public class soldestinos extends AppCompatActivity {
                             }
                         }).show();
 
-            }
-            else if (newRowID == -1) {
+            } else if (newRowID == -1) {
                 new AlertDialog.Builder(this)
                         .setTitle("Error en el registro")
                         .setMessage("No se ha podido registrar. Puede que el expediente " +
@@ -183,5 +185,34 @@ public class soldestinos extends AppCompatActivity {
         goBack.putExtra("USER_NAME", et_nombre.getText().toString());
         goBack.putExtra("USER_EXP", et_expediente.getText().toString());
         startActivity(goBack);
+    }
+
+    public void userInfo(String exp) {
+        String[] projection = { Model.Alumnos.COLUMN_NAME_EXPEDIENTE, Model.Alumnos.COLUMN_NAME_CAMPUS,
+                                Model.Alumnos.COLUMN_NAME_CREDITOS, Model.Alumnos.COLUMN_NAME_PROMEDIO,
+                                Model.Alumnos.COLUMN_NAME_PHONE, Model.Alumnos.COLUMN_NAME_EMAIL,
+                                Model.Alumnos.COLUMN_NAME_LIC, Model.Alumnos.COLUMN_NAME_NOMBRE };
+        String selection = Model.Alumnos.COLUMN_NAME_EXPEDIENTE + " = ?";
+        String[] selectionArgs = { currentExp };
+        Cursor fila = db.query(Model.Alumnos.TABLE_NAME, projection, selection, selectionArgs,
+                                null, null, null);
+
+        while (fila.moveToNext()) {
+            campus = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_CAMPUS));
+            //credits = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_CREDITOS));
+            prom = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_PROMEDIO));
+            phone = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_PHONE));
+            email = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_EMAIL));
+            lic = fila.getString(fila.getColumnIndex(Model.Alumnos.COLUMN_NAME_LIC));
+        }
+        fila.close();
+
+        et_nombre.setText(currentName);
+        et_expediente.setText(currentExp);
+        et_campus.setText(campus);
+        et_promedio.setText(prom);
+        et_telefono.setText(phone);
+        et_licenciatura.setText(lic);
+
     }
 }

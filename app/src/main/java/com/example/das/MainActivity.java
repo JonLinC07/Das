@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText exp, pass;
     TextView text;
 
+    MediaPlayer click;
     //Declaración de elementos logicos
     DBHelper DBHelper;
     SQLiteDatabase db;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         pass = findViewById(R.id._inputPass);
         text = findViewById(R.id.textView);
 
+        click = MediaPlayer.create(this, R.raw.click);
+
         //Inicilización de elementos logicos
         DBHelper = new DBHelper(getApplicationContext());
         db = DBHelper.getReadableDatabase();
@@ -53,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void GoToSignUp(View v) {
+        click.start();
         Intent goToSignUp = new Intent(getApplicationContext(), SignUp.class);
         startActivity(goToSignUp);
     }
 
     //Este metodo se ejecuta cuando le das click al boton de Sign Im
     public void GoToHome(View v) {
+        click.start();
         usrExp = exp.getText().toString();
         usrPass = pass.getText().toString();
         String expediente = "", contraseña = "", usrName = "";

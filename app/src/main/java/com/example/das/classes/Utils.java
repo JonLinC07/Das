@@ -1,6 +1,6 @@
 package com.example.das.classes;
 
 public class Utils {
-    public static final String EMAIL = "lincorsoft@gmail.com";
-    public static final String PASSWORD = "aplicacioneslin93";
+    public static final String EMAIL = "EMAIL";
+    public static final String PASSWORD = "PASSWORD";
 }

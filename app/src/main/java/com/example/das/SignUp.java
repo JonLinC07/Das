@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -26,6 +27,7 @@ public class SignUp extends AppCompatActivity {
     com.example.das.classes.DBHelper DBHelper;
     SQLiteDatabase db;
     ContentValues values;
+    MediaPlayer click;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class SignUp extends AppCompatActivity {
         confirmPass = findViewById(R.id._confirmPass);
         terms = findViewById(R.id._checkTerms);
 
+        click = MediaPlayer.create(this, R.raw.click);
+
         //Inicilización de elementos logicos
         DBHelper = new DBHelper(getApplicationContext());
         db = DBHelper.getWritableDatabase();
@@ -51,6 +55,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void sendUser(View v) {
+        click.start();
 
         if (checkEmptyFields() && checkTerms() && checkConfirmPass(checkEmptyFields())) {
 

@@ -15,6 +15,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class EditProfile extends AppCompatActivity {
     SeekBar seekProm;
     Spinner spinCampus;
     ImageView viewPhoto;
+
+    MediaPlayer click;
 
     //Declaración de elementos logicos
     DBHelper DBHelper;
@@ -82,6 +85,8 @@ public class EditProfile extends AppCompatActivity {
         seekProm = findViewById(R.id._seekProm);
         spinCampus = findViewById(R.id._spinCampus);
         viewPhoto = findViewById(R.id._viewPhoto);
+
+        click = MediaPlayer.create(this, R.raw.click);
 
         //Inicialización de elementos logicos
         DBHelper = new DBHelper(getApplicationContext());
@@ -251,6 +256,8 @@ public class EditProfile extends AppCompatActivity {
 
     //Verificar permisos y abrir la galeria
     public void GoToGallery(View v) {
+        click.start();
+
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, RESULT_LOAD_IMAGE);
         } else {
